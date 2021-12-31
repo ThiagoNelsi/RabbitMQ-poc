@@ -1,0 +1,23 @@
+{
+  "name": "app1",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node build/index.js",
+    "dev": "npx ts-node-dev ./src/index.ts --transpileOnly --respawn",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@types/node": "^17.0.5",
+    "@types/amqplib": "^0.8.2",
+    "ts-node-dev": "^1.1.8",
+    "typescript": "^4.5.4"
+  },
+  "dependencies": {
+    "amqplib": "^0.8.0"
+  }
+}
