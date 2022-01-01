@@ -20,18 +20,18 @@ services:
     depends_on:
       - rabbitmq
     volumes:
-      - ./adminApp/admin-backend:/app
+      - ./adminApp/backend:/app
     restart: always
     command: sh -c "cd /app && npm install --also-dev && npm run dev"
 
   admin-frontend:
     image: node:lts-alpine
-    container_name: app2
+    container_name: admin-frontend
     ports:
       - "3000:3000"
     depends_on:
       - rabbitmq
     volumes:
-      - ./adminApp/admin-interface:/app
+      - ./adminApp/frontend:/app
     restart: always
     command: sh -c "cd /app && npm install --also-dev && npm start"
