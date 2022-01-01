@@ -11,27 +11,27 @@ services:
     environment:
       - RABBITMQ_DEFAULT_USER=admin
       - RABBITMQ_DEFAULT_PASS=admin
-      
-  app1:
+
+  admin-backend:
     image: node:lts-alpine
-    container_name: app1
+    container_name: admin-backend
     ports:
       - "8080:8080"
     depends_on:
       - rabbitmq
     volumes:
-      - ./microservices/app1:/app
+      - ./adminApp/admin-backend:/app
     restart: always
     command: sh -c "cd /app && npm install --also-dev && npm run dev"
 
-  app2:
-      image: node:lts-alpine
-      container_name: app2
-      ports:
-        - "8081:8081"
-      depends_on:
-        - rabbitmq
-      volumes:
-        - ./microservices/app2:/app
-      restart: always
-      command: sh -c "cd /app && npm install --also-dev && npm run dev"
+  admin-frontend:
+    image: node:lts-alpine
+    container_name: app2
+    ports:
+      - "3000:3000"
+    depends_on:
+      - rabbitmq
+    volumes:
+      - ./adminApp/admin-interface:/app
+    restart: always
+    command: sh -c "cd /app && npm install --also-dev && npm start"
