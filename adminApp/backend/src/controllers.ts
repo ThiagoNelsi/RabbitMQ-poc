@@ -8,7 +8,7 @@ Controller.register('GET', '/', (req: Request, res: Response) => {
 });
 
 Controller.register('GET', '/products', (req: Request, res: Response) => {
-    res.end(JSON.stringify(products));
+    res.end(JSON.stringify(products.reverse()));
 });
 
 Controller.register('POST', '/products', async (req: Request, res: Response) => {
