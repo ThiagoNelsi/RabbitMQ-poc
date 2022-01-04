@@ -1,13 +1,14 @@
 import http from 'http';
 import Controller from './Controller';
+import RabbitMQServer from './infra/RabbitMQ';
+import productsControllers from './productsControllers';
 
 const PORT = process.env.PORT || 8080;
 
 async function setupServer() {
-  const server = http.createServer((req, res) => {
 
-    console.log(req.method === 'POST')
-
+  // SETUP SERVER
+  const server = http.createServer(async (req, res) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
     res.setHeader('Access-Control-Max-Age', 2592000);
@@ -28,7 +29,12 @@ async function setupServer() {
     });
   });
 
-  await import('./controllers');
+  // SETUP RabbitMQ
+  const rabbitmq = new RabbitMQServer();
+  await rabbitmq.connect();
+
+  // SETUP ROUTES/CONTROLLERS
+  productsControllers({ messageBroker: rabbitmq });
 
   server.listen(8080, () => {
     console.log('Server is running on port ' + PORT);
