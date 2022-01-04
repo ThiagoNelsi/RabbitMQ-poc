@@ -53,6 +53,7 @@ export default function CreateProductModal({ open, handleClose }: { open: boolea
       },
       body: JSON.stringify(product),
     }).then(() => {
+      setImageUrl('');
       handleClose();
     });
 
