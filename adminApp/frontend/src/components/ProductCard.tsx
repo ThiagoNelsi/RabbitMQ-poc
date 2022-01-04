@@ -1,6 +1,7 @@
 import React from 'react';
 import { Grid, Typography, Card, CardHeader, CardMedia, CardContent, CardActions } from '@mui/material';
 import { IProduct } from '../definitions/IProduct';
+import noImageIcon from '../assets/no-image.jpg';
 
 export default function ProductCard({ product }: { product: IProduct }) {
   return (
@@ -10,7 +11,7 @@ export default function ProductCard({ product }: { product: IProduct }) {
         <CardMedia
           component="img"
           height={200}
-          image={product.image}
+          src={product.image || noImageIcon}
           alt={product.name + ' image'}
         />
         <CardContent>
