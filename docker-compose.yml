@@ -35,3 +35,14 @@ services:
       - ./adminApp/frontend:/app
     restart: always
     command: sh -c "cd /app && npm install --also-dev && npm start"
+
+  notifyMicroservice:
+    image: node:lts-alpine
+    container_name: notifyMicroservice
+    ports:
+      - "9999:9999"
+    depends_on:
+      - rabbitmq
+    volumes:
+      - ./microservices/notify:/app
+    command: sh -c "cd /app && npm install --also-dev && npm run dev"
